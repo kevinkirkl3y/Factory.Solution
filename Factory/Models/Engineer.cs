@@ -11,6 +11,7 @@ namespace Factory.Models
     public Engineer()
     {
       this.Licenses = new HashSet<LicenseEngineer>();
+      this.Machines = new HashSet<MachineEngineer>();
     }
     public int EngineerId { get; set; }
     public string EngineerName { get; set; }
@@ -20,5 +21,6 @@ namespace Factory.Models
     public DateTime HireDate { get; set; }
 
     public virtual ICollection<LicenseEngineer> Licenses { get; set; }
+    public virtual ICollection<MachineEngineer> Machines { get; set; }
   }
 }
