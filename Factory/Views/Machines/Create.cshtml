@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  @model Factory.Models.Machine;
+  <h2>Log New Machinery</h2>
+  <hr />
+
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.MachineId)
+
+    @Html.Label("Name")<br>
+    @Html.TextBoxFor(model => model.MachineName)<br>
+
+    @Html.Label("Serial Number")<br>
+    @Html.TextBoxFor(model => model.SerialNumber)<br>
+
+    @Html.Label("Install Date")<br>
+
+    @Html.TextBoxFor(model => model.InstallDate, new {type="date"} )<br>
+
+    <br><input type="submit" value="Save" />
+  }
+  <br><p>@Html.ActionLink("Return to Machinery List", "Index")</p>
+</div>

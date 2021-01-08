@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Machine;
+<div class="container">
+  <h2>Machinery Details:</h2>
+  <hr />
+  <h4>Name: @Html.DisplayFor(model => model.MachineName)</h4><br>
+  <h4>Serial Number: @Html.DisplayFor(model => model.SerialNumber)</h4><br>
+  <h4>Installation Date: @Html.DisplayFor(model => model.InstallDate)</h4><br>
+  @if (@Model.Licenses.Count == 0)
+  {
+    <h3>There no recorded repair licenses for this machinery.</h3>
+  }
+  else
+  {
+    <h4>Required Repair Licenses:</h4>
+    <ul class="no-bullets">
+      @foreach (var join in Model.Licenses)
+      {
+        <li>@join.License.LicenseType</li>
+        @using (Html.BeginForm("DeleteLicense", "Machines"))
+        {
+          @Html.Hidden("joinId", @join.MachineLicenseId)
+          <input type="submit" value="Delete" />
+        }
+      }
+    </ul>
+  }
+  <br><p>@Html.ActionLink("View All Machinery", "Index")</p>
+  <br><p>@Html.ActionLink("Edit Machinery Information", "Edit", new {id = Model.MachineId})</p>
+  <br><p>@Html.ActionLink("Remove Machinery Record", "Delete", new {id = Model.MachineId})</p>
+  <br><p>@Html.ActionLink("Add Required Repair License", "AddLicense", new {id = Model.MachineId})</p>
+</div>
