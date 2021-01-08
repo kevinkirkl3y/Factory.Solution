@@ -10,10 +10,10 @@
   {
     @Html.HiddenFor(model => model.EngineerId)
 
-    @Html.LabelFor(model => model.EngineerName)<br>
+    @Html.Label("Name")<br>
     @Html.TextBoxFor(model => model.EngineerName)<br>
 
-    @Html.LabelFor(model => model.EngineerContact)<br>
+    @Html.Label("Phone Number")<br>
     @Html.TextBoxFor(model => model.EngineerContact)<br>
 
     @Html.LabelFor(model => model.HireDate)<br>

@@ -10,14 +10,13 @@
   {
     @Html.HiddenFor(model => model.EngineerId)
 
-    @Html.LabelFor(model => model.EngineerName)<br>
-    @Html.TextBoxFor(model => model.EngineerName)<br>
+    @Html.Label("Name")<br>
+    @Html.TextBoxFor(model => model.EngineerName)<br><br>
 
-    @Html.LabelFor(model => model.EngineerContact)<br>
-    @Html.TextBoxFor(model => model.EngineerContact)<br>
+    @Html.Label("Phone Number")<br>
+    @Html.TextBoxFor(model => model.EngineerContact)<br><br>
 
-    @Html.LabelFor(model => model.HireDate)<br>
-
+    @Html.Label("Hire Date")<br>
     @Html.TextBoxFor(model => model.HireDate, new {type="date"} )<br>
 
     <br><input type="submit" value="Save" />
