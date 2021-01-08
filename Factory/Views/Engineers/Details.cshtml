@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.Engineer;
+<div class="container">
+  <h2>Employee Details:</h2>
+  <hr />
+  <h4>Name: @Html.DisplayFor(model => model.EngineerName)</h4><br>
+  <h4>Contact Info: @Html.DisplayFor(model => model.EngineerContact)</h4><br>
+  <h4>Hire Date: @Html.DisplayFor(model => model.HireDate)</h4><br>
+  @if (@Model.Licenses.Count == 0)
+  {
+    <h3>This employee currenlty has no machine repair licenses.</h3>
+  }
+  else
+  {
+    <h4>Repair Licenses:</h4>
+    <ul class="no-bullets">
+      @foreach (var join in Model.Licenses)
+      {
+        <li>@join.License.LicenseType</li>
+        @using (Html.BeginForm("DeleteLicense", "Engineers"))
+        {
+          @Html.Hidden("joinId", @join.LicenseEngineerId)
+          <input type="submit" value="Delete" />
+        }
+      }
+    </ul>
+  }
+  <br><p>@Html.ActionLink("Back to employee list", "Index")</p>
+  <br><p>@Html.ActionLink("Edit Employee", "Edit", new {id = Model.EngineerId})</p>
+  <br><p>@Html.ActionLink("Remove Employee", "Delete", new {id = Model.EngineerId})</p>
+  <br><p>@Html.ActionLink("Add Repair License", "AddLicense", new {id = Model.EngineerId})</p>
+</div>

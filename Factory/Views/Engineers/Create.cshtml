@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  @model Factory.Models.Engineer;
+  <h2>Add New Hire</h2>
+  <hr />
+
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.EngineerId)
+
+    @Html.LabelFor(model => model.EngineerName)<br>
+    @Html.TextBoxFor(model => model.EngineerName)<br>
+
+    @Html.LabelFor(model => model.EngineerContact)<br>
+    @Html.TextBoxFor(model => model.EngineerContact)<br>
+
+    @Html.LabelFor(model => model.HireDate)<br>
+
+    @Html.TextBoxFor(model => model.HireDate, new {type="date"} )<br>
+
+    <br><input type="submit" value="Save" />
+  }
+  <br><p>@Html.ActionLink("Return to Engineer List", "Index")</p>
+</div>
