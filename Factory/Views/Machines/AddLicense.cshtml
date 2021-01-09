@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  @model Factory.Models.Machine
+<h2>Register Repair License</h2>
+<hr />
+<h4>Register Repair License To: @Html.DisplayFor(model => model.MachineName)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.MachineId)
+
+  @Html.Label("Select License")<br>
+  @Html.DropDownList("LicenseId")
+
+  <br><br><input type="submit" value="Save" />
+}
+<br><p>@Html.ActionLink("Return to Machinery List", "Index")</p>
+
+</div>

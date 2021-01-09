@@ -59,6 +59,22 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    public ActionResult AddLicense(int id)
+    {
+      var thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+      ViewBag.LicenseId = new SelectList(_db.Licenses, "LicenseId", "LicenseType");
+      return View(thisMachine); 
+    }
+    [HttpPost]
+    public ActionResult AddLicense(Machine machine, int LicenseId)
+    {
+      if (LicenseId != 0)
+      {
+        _db.MachineLicense.Add( new MachineLicense() { LicenseId = LicenseId, MachineId = machine.MachineId});
+      }
+      _db.SaveChanges();
+      return View("Index");
+    }
     public ActionResult Delete(int id)
     {
       var thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
@@ -69,6 +85,14 @@ namespace Factory.Controllers
     {
       var thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
       _db.Machines.Remove(thisMachine);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    [HttpPost]
+    public ActionResult DeleteLicense(int joinId)
+    {
+      var joinEntry = _db.MachineLicense.FirstOrDefault(entry => entry.MachineLicenseId == joinId);
+      _db.MachineLicense.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
