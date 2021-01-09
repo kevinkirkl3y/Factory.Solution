@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  @model Factory.Models.License
+
+  <h2>Are you sure you want to remove this license?</h2>
+  <hr />
+  <h4>Type: @Html.DisplayFor(model => model.LicenseType)</h4> <br>
+  @using (Html.BeginForm())
+  {
+    <input type="submit" value="Delete" /><br><br>
+  }
+  @Html.ActionLink("Repair License List", "Index")
+</div>

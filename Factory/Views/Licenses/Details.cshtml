@@ -1,0 +1,41 @@
+@{
+  Layout = "_Layout";
+}
+@model Factory.Models.License;
+<div class="container">
+  <h2>Repair License Details:</h2>
+  <hr />
+  <h4>Type: @Html.DisplayFor(model => model.LicenseType)</h4><br>
+  <h4>Issue Date: @Html.DisplayFor(model => model.IssueDate)</h4><br>
+  @if (@Model.Engineers.Count == 0)
+  {
+    <h3>No employees currently hold this repair license.</h3>
+  }
+  else
+  {
+    <h4>Employees with certification:</h4>
+    <ul class="no-bullets">
+      @foreach (var join in Model.Engineers)
+      {
+        <li>@join.Engineer.EngineerName</li>
+      }
+    </ul>
+  }
+  @if (@Model.Machines.Count == 0)
+  {
+    <h3>No machines require a repair license.</h3>
+  }
+  else
+  {
+    <h4>Machines Requiring Repair Licenses:</h4>
+    <ul class="no-bullets">
+      @foreach (var join in Model.Machines)
+      {
+        <li>@join.Machine.MachineName</li>
+      }
+    </ul>
+  }
+  <br><p>@Html.ActionLink("Back to repair license list", "Index")</p>
+  <br><p>@Html.ActionLink("Edit Repair License", "Edit", new {id = Model.LicenseId})</p>
+  <br><p>@Html.ActionLink("Remove Repair License", "Delete", new {id = Model.LicenseId})</p>
+</div>

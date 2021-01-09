@@ -10,6 +10,7 @@ namespace Factory.Models
     public License()
     {
       this.Engineers = new HashSet<LicenseEngineer>();
+      this.Machines = new HashSet<MachineLicense>();
     }
     public int LicenseId { get; set; }
     public string LicenseType { get; set; }
@@ -17,6 +18,7 @@ namespace Factory.Models
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyy-MM-dd}")]
     public DateTime IssueDate { get; set; }
     public virtual ICollection<LicenseEngineer> Engineers { get; set; }
+    public virtual ICollection<MachineLicense> Machines { get; set; }
 
   }
 }

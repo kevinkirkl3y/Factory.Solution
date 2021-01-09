@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  @model Factory.Models.License;
+  <h2>Log Repair License</h2>
+  <hr />
+
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.LicenseId)
+
+    @Html.Label("Type")<br>
+    @Html.TextBoxFor(model => model.LicenseType)<br><br>
+
+    @Html.Label("Date Issued")<br>
+    @Html.TextBoxFor(model => model.IssueDate, new {type="date"} )<br>
+
+    <br><input type="submit" value="Save" />
+  }
+  <br><p>@Html.ActionLink("Return to Repair License List", "Index")</p>
+</div>
