@@ -59,6 +59,22 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    public ActionResult AddLicense(int id)
+    {
+      var thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
+      ViewBag.LicenseId = new SelectList(_db.Licenses, "LicenseId", "LicenseType");
+      return View(thisEngineer); 
+    }
+    [HttpPost]
+    public ActionResult AddLicense(Engineer engineer, int LicenseId)
+    {
+      if (LicenseId != 0)
+      {
+        _db.LicenseEngineer.Add( new LicenseEngineer() { LicenseId = LicenseId, EngineerId = engineer.EngineerId});
+      }
+      _db.SaveChanges();
+      return View("Index");
+    }
     public ActionResult Delete(int id)
     {
       var thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
@@ -69,6 +85,14 @@ namespace Factory.Controllers
     {
       var thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
       _db.Engineers.Remove(thisEngineer);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    [HttpPost]
+    public ActionResult DeleteLicense(int joinId)
+    {
+      var joinEntry = _db.LicenseEngineer.FirstOrDefault(entry => entry.LicenseEngineerId == joinId);
+      _db.LicenseEngineer.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
