@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Factory.Migrations
 {
     [DbContext(typeof(FactoryContext))]
-    [Migration("20210108210919_Initial")]
-    partial class Initial
+    [Migration("20210110200232_Final")]
+    partial class Final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,24 +83,6 @@ namespace Factory.Migrations
                     b.ToTable("Machines");
                 });
 
-            modelBuilder.Entity("Factory.Models.MachineEngineer", b =>
-                {
-                    b.Property<int>("MachineEngineerId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("EngineerId");
-
-                    b.Property<int>("MachineId");
-
-                    b.HasKey("MachineEngineerId");
-
-                    b.HasIndex("EngineerId");
-
-                    b.HasIndex("MachineId");
-
-                    b.ToTable("MachineEngineer");
-                });
-
             modelBuilder.Entity("Factory.Models.MachineLicense", b =>
                 {
                     b.Property<int>("MachineLicenseId")
@@ -132,23 +114,10 @@ namespace Factory.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Factory.Models.MachineEngineer", b =>
-                {
-                    b.HasOne("Factory.Models.Engineer", "Engineer")
-                        .WithMany("Machines")
-                        .HasForeignKey("EngineerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Factory.Models.Machine", "Machine")
-                        .WithMany("Engineers")
-                        .HasForeignKey("MachineId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Factory.Models.MachineLicense", b =>
                 {
                     b.HasOne("Factory.Models.License", "License")
-                        .WithMany()
+                        .WithMany("Machines")
                         .HasForeignKey("LicenseId")
                         .OnDelete(DeleteBehavior.Cascade);
 

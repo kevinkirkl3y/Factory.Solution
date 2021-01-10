@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Factory.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Final : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,32 +79,6 @@ namespace Factory.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MachineEngineer",
-                columns: table => new
-                {
-                    MachineEngineerId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    EngineerId = table.Column<int>(nullable: false),
-                    MachineId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MachineEngineer", x => x.MachineEngineerId);
-                    table.ForeignKey(
-                        name: "FK_MachineEngineer_Engineers_EngineerId",
-                        column: x => x.EngineerId,
-                        principalTable: "Engineers",
-                        principalColumn: "EngineerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MachineEngineer_Machines_MachineId",
-                        column: x => x.MachineId,
-                        principalTable: "Machines",
-                        principalColumn: "MachineId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MachineLicense",
                 columns: table => new
                 {
@@ -141,16 +115,6 @@ namespace Factory.Migrations
                 column: "LicenseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MachineEngineer_EngineerId",
-                table: "MachineEngineer",
-                column: "EngineerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MachineEngineer_MachineId",
-                table: "MachineEngineer",
-                column: "MachineId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MachineLicense_LicenseId",
                 table: "MachineLicense",
                 column: "LicenseId");
@@ -165,9 +129,6 @@ namespace Factory.Migrations
         {
             migrationBuilder.DropTable(
                 name: "LicenseEngineer");
-
-            migrationBuilder.DropTable(
-                name: "MachineEngineer");
 
             migrationBuilder.DropTable(
                 name: "MachineLicense");

@@ -13,12 +13,15 @@
   {
     <h3>There is currently no installed machinery.</h3>
   }
-  <ul class="no-bullets">
-    @foreach (Machine machine in Model)
-    {
-        <li>@Html.ActionLink($"{machine.MachineName}", "Details", new { id = machine.MachineId})</li><br>
-    }
-  </ul>
+  else 
+  {
+    <ul class="no-bullets">
+      @foreach (Machine machine in Model)
+      {
+          <li>@Html.ActionLink($"{machine.MachineName}", "Details", new { id = machine.MachineId})</li><br>
+      }
+    </ul>
+  }
   <br><p>@Html.ActionLink("Log Machinery Install", "Create")</p>
   <br><p>@Html.ActionLink("Homepage", "Index", "Home")</p>
 </div>

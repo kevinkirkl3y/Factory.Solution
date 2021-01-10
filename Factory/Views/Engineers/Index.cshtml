@@ -13,12 +13,15 @@
   {
     <h3>There are currently no Engineers employed.</h3>
   }
-  <ul class="no-bullets">
-    @foreach (Engineer engineer in Model)
-    {
-        <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", new { id = engineer.EngineerId})</li><br>
-    }
-  </ul>
+  else
+  {
+    <ul class="no-bullets">
+      @foreach (Engineer engineer in Model)
+      {
+          <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", new { id = engineer.EngineerId})</li><br>
+      }
+    </ul>
+  }
   <br><p>@Html.ActionLink("Add New Hire", "Create")</p>
   <br><p>@Html.ActionLink("Homepage", "Index", "Home")</p>
 </div>
