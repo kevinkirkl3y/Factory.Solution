@@ -10,11 +10,11 @@
   <h4>Installation Date: @Html.DisplayFor(model => model.InstallDate)</h4><br>
   @if (@Model.Licenses.Count == 0)
   {
-    <h3>There no recorded repair licenses for this machinery.</h3>
+    <h4>There no recorded repair licenses for this machinery.</h4>
   }
   else
   {
-    <h4>Required Repair Licenses:</h4>
+    <h4>Required Repair License:</h4>
     <ul class="no-bullets">
       @foreach (var join in Model.Licenses)
       {

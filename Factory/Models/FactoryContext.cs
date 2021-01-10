@@ -9,7 +9,6 @@ namespace Factory.Models
     public DbSet<License> Licenses { get; set; }
     public DbSet<LicenseEngineer> LicenseEngineer { get; set; }
     public DbSet<MachineLicense> MachineLicense { get; set; }
-    public DbSet<MachineEngineer> MachineEngineer { get; set; }
     public FactoryContext(DbContextOptions options) : base(options) { }
   }
 }

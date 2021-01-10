@@ -9,7 +9,6 @@ namespace Factory.Models
   {
     public Machine()
     {
-      this.Engineers = new HashSet<MachineEngineer>();
       this.Licenses = new HashSet<MachineLicense>();
     }
     public int MachineId { get; set; }
@@ -18,7 +17,6 @@ namespace Factory.Models
     [DisplayName("Add Date")]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyy-MM-dd}")]
     public DateTime InstallDate { get; set; }
-    public virtual ICollection<MachineEngineer> Engineers { get; set; }
     public virtual ICollection<MachineLicense> Licenses { get; set; }
   }
 }

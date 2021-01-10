@@ -3,6 +3,8 @@ using Factory.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace Factory.Controllers
 {
@@ -20,12 +22,22 @@ namespace Factory.Controllers
     }
     public ActionResult Create()
     {
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
       return View();
     }
     [HttpPost]
-    public ActionResult Create (License license)
+    public ActionResult Create (License license, int EngineerId, int MachineId)
     {
       _db.Licenses.Add(license);
+      if (MachineId !=0)
+      {
+        _db.MachineLicense.Add(new MachineLicense() { MachineId = MachineId, LicenseId = license.LicenseId });
+      }
+      if (EngineerId !=0)
+      {
+        _db.LicenseEngineer.Add(new LicenseEngineer() { EngineerId = EngineerId, LicenseId = license.LicenseId});
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -34,6 +46,8 @@ namespace Factory.Controllers
       var thisLicense = _db.Licenses
       .Include(license => license.Engineers)
       .ThenInclude(join => join.Engineer)
+      .Include(license => license.Machines)
+      .ThenInclude(join => join.Machine)
       .FirstOrDefault(license => license.LicenseId == id);
       return View(thisLicense);
     }
