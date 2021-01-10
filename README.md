@@ -1,10 +1,11 @@
-# 
+# Dr. Sillystringz's Factory
 
-#### 
+#### Epicodus C# Many-To-Many Relationship Database Practice 1.8.2021
 
 #### by _**Kevin Kirkley**_
 
 ## Description
+Dr. Sillystingz factory has a lot of moving parts. This program was created in order to keep up with the regular maintenance needed by machinery. The program tracks the staff of engineers, machinery and the licenses required to be certified to work on the various pieces of equipment. Machinery details include the neccesary repair licensing and engineers are able to note which licenses they hold, as they should only repair machinery they are certified to work on. 
    
 
 
@@ -28,16 +29,16 @@
 5. MySQLWorkbench.
 
 ### Open by downloading:
-1. Download the [repository]() onto your computer by clicking the 'clone or download button'.
-2. Open within your text editor and navigate to the `RecordCollection` folder and run `dotnet restore` in your console.
+1. Download the [repository](https://github.com/kevinkirkl3y/Factory.Solution.git) onto your computer by clicking the 'clone or download button'.
+2. Open within your text editor and navigate to the `Factory.Solution/Factory` folder and run `dotnet restore` in your console.
 
 ### Open with Bash/GitBash:
 1. Clone this repository onto your computer: 
 ```
-
+git clone https://github.com/kevinkirkl3y/Factory.Solution.git
 ```
-2. Navigate into the '' directory and open in VSCode or preferred text editor using 'code .' in your terminal.
-3. Open within your text editor and navigate to the `` folder and run `dotnet restore` in your console.
+2. Navigate into the `Factory.Solution` directory and open in VSCode or preferred text editor using `code .` in your terminal.
+3. Open within your text editor and navigate to the `Factory.Solution/Factory` folder and run `dotnet restore` in your console.
 
 ### AppSettings
 * This project requires an AppSettings file. Create your `appsettings.json` file in the main RecordCollection file following the format below. Use your unique password that you created duing MySQLWorkbench installation:
@@ -45,20 +46,99 @@
 ```  
 {
   "ConnectionStrings": {
-      "DefaultConnection": "Server=localhost;Port=3306;database=;uid=root;pwd=<YourPassword>;"
+      "DefaultConnection": "Server=localhost;Port=3306;database=<firstName_lastName_Factory>;uid=root;pwd=<YourPassword>;"
   }
 } 
 ```
 * Update the Server, Port and User Id as needed.
 ### Setup of MySQL Database 
 
-* Navigate to `` and type `dotnet ef migrations add <MigrationName>` into the terminal. 
+* Navigate to `Factory.Solution/Factory` and type `dotnet ef migrations add <MigrationName>` into the terminal. 
 * Then, type `dotnet ef database update` into the terminal to create your database tables.
 
 ### DB SQL Schema Snippet
 
 * Paste this Schema Create Statement directly into MySQLWorkbench to create this database and its tables. 
 ```
+CREATE DATABASE  IF NOT EXISTS `kevin_kirkley_factory` 
+USE `kevin_kirkley_factory`;
+
+ SET NAMES utf8 ;
+
+
+DROP TABLE IF EXISTS `__EFMigrationsHistory`;
+
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `__EFMigrationsHistory` (
+  `MigrationId` varchar(95) NOT NULL,
+  `ProductVersion` varchar(32) NOT NULL,
+  PRIMARY KEY (`MigrationId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+DROP TABLE IF EXISTS `Engineers`;
+
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Engineers` (
+  `EngineerId` int(11) NOT NULL AUTO_INCREMENT,
+  `EngineerName` longtext,
+  `EngineerContact` longtext,
+  `HireDate` datetime(6) NOT NULL,
+  PRIMARY KEY (`EngineerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DROP TABLE IF EXISTS `LicenseEngineer`;
+
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `LicenseEngineer` (
+  `LicenseEngineerId` int(11) NOT NULL AUTO_INCREMENT,
+  `LicenseId` int(11) NOT NULL,
+  `EngineerId` int(11) NOT NULL,
+  PRIMARY KEY (`LicenseEngineerId`),
+  KEY `IX_LicenseEngineer_EngineerId` (`EngineerId`),
+  KEY `IX_LicenseEngineer_LicenseId` (`LicenseId`),
+  CONSTRAINT `FK_LicenseEngineer_Engineers_EngineerId` FOREIGN KEY (`EngineerId`) REFERENCES `engineers` (`EngineerId`) ON DELETE CASCADE,
+  CONSTRAINT `FK_LicenseEngineer_Licenses_LicenseId` FOREIGN KEY (`LicenseId`) REFERENCES `licenses` (`LicenseId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+DROP TABLE IF EXISTS `Licenses`;
+
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Licenses` (
+  `LicenseId` int(11) NOT NULL AUTO_INCREMENT,
+  `LicenseType` longtext,
+  `IssueDate` datetime(6) NOT NULL,
+  PRIMARY KEY (`LicenseId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+DROP TABLE IF EXISTS `MachineLicense`;
+
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `MachineLicense` (
+  `MachineLicenseId` int(11) NOT NULL AUTO_INCREMENT,
+  `MachineId` int(11) NOT NULL,
+  `LicenseId` int(11) NOT NULL,
+  PRIMARY KEY (`MachineLicenseId`),
+  KEY `IX_MachineLicense_LicenseId` (`LicenseId`),
+  KEY `IX_MachineLicense_MachineId` (`MachineId`),
+  CONSTRAINT `FK_MachineLicense_Licenses_LicenseId` FOREIGN KEY (`LicenseId`) REFERENCES `licenses` (`LicenseId`) ON DELETE CASCADE,
+  CONSTRAINT `FK_MachineLicense_Machines_MachineId` FOREIGN KEY (`MachineId`) REFERENCES `machines` (`MachineId`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+DROP TABLE IF EXISTS `Machines`;
+
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `Machines` (
+  `MachineId` int(11) NOT NULL AUTO_INCREMENT,
+  `MachineName` longtext,
+  `SerialNumber` longtext,
+  `InstallDate` datetime(6) NOT NULL,
+  PRIMARY KEY (`MachineId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 ```
 
