@@ -144,7 +144,7 @@ CREATE TABLE `Machines` (
 
 
 ## Known Bugs
-* When adding a repair license to either Engineer or Machine, users are sent to a "NullReferenceException" Page stating that there is an issue with `@if (@Model.Count == 0) within the Index.cshtml view of their respective Views. While sent to this error page, the connection between License and either Engineer or Machine is created. -- In an attempt to fix this I changed the format of adding object to the list within the Index section of their respective Controller. I feel it's important to note that this works in every case except when License is added to the object. 
+* When adding a repair license to either Engineer or Machine, users are sent to a "NullReferenceException" Page stating that there is an issue with `@if (@Model.Count == 0) within the Index.cshtml view of their respective Views. While sent to this error page, the connection between License and either Engineer or Machine is created. -- In an attempt to fix this I changed the format of adding object to the list within the Index section of their respective Controller. I feel it's important to note that this works in every case except when License is added to the object. 1/8/2021
 
 
 ## Support and contact detail
