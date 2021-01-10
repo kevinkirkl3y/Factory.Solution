@@ -17,8 +17,8 @@ namespace Factory.Models
     [DisplayName("Add Date")]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyy-MM-dd}")]
     public DateTime IssueDate { get; set; }
-    public virtual ICollection<LicenseEngineer> Engineers { get; set; }
-    public virtual ICollection<MachineLicense> Machines { get; set; }
+    public ICollection<LicenseEngineer> Engineers { get; set; }
+    public ICollection<MachineLicense> Machines { get; set; }
 
   }
 }
