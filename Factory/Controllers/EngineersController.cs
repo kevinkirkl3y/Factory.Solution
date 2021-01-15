@@ -73,7 +73,7 @@ namespace Factory.Controllers
         _db.LicenseEngineer.Add( new LicenseEngineer() { LicenseId = LicenseId, EngineerId = engineer.EngineerId});
       }
       _db.SaveChanges();
-      return View("Index");
+      return RedirectToAction("Index");
     }
     public ActionResult Delete(int id)
     {

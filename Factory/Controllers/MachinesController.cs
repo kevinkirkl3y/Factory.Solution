@@ -73,7 +73,7 @@ namespace Factory.Controllers
         _db.MachineLicense.Add( new MachineLicense() { LicenseId = LicenseId, MachineId = machine.MachineId});
       }
       _db.SaveChanges();
-      return View("Index");
+      return RedirectToAction("Index");
     }
     public ActionResult Delete(int id)
     {
